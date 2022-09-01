@@ -1,0 +1,32 @@
+<h1>Transação</h1>
+<mat-divider class="my-3"></mat-divider>
+
+<!-- <form class="example-form"> -->
+
+  <mat-form-field class="example-full-width my-2" appearance="fill">
+    <mat-label>Descrição</mat-label>
+    <input matInput [(ngModel)]="descricaoInput" #descricaoText maxlength="256" placeholder="Descrição da Transação">
+    <mat-hint align="start"><strong>Ex.: Compra de produtos para o estoque.</strong> </mat-hint>
+    <mat-hint align="end">{{descricaoText.value.length}} / 256</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" floatLabel="always" class="my-2 me-3">
+    <mat-label>Valor</mat-label>
+    <input matInput [(ngModel)]="valorInput" type="number" class="example-right-align" placeholder="0">
+    <span matPrefix>R$&nbsp;</span>
+    <!-- <span matSuffix>.00</span> -->
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="my-2 me-3">
+    <mat-label>Tipo da Transação</mat-label>
+    <mat-select [(ngModel)]="tipoInput">
+      <mat-option value="ENTRADA">Entrada</mat-option>
+      <mat-option value="SAIDA">Saída</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button class="me-3 btn btn-success" (click)="salvar()" >Salvar</button>
+    <button class="me-3 btn btn-danger" (click)="cancelar()">Cancelar</button>
+  </div>
+<!-- </form> -->
