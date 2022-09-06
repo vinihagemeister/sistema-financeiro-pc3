@@ -100,10 +100,10 @@ export class PaginaPrincipalComponent implements OnInit {
     this.transacoes.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialogAddTransacao(obj?: Transacao){
+  openDialogAddOrUpdateTransacao(obj?: Transacao){
     const dialogRef = this.dialog.open(DialogInserirTransacaoComponent, {
       width: '1000px',
-      data: {a: "aaaa"}
+      data: { transacao: obj}
     });
 
     dialogRef.afterClosed().subscribe(result => {

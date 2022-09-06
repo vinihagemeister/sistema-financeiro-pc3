@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-evenly">
     <button type="button" class="btn btn-danger" (click)="navegarPara(['pagina1'])"> Pagina 1 </button>
     <button type="button" class="btn btn-primary" (click)="navegarPara(['pagina2'])"> Pagina 2 </button>
-    <button type="button" class="btn btn-success" (click)="openDialogAddTransacao()"> Add Transação </button>
+    <button type="button" class="btn btn-success" (click)="openDialogAddOrUpdateTransacao()"> Add Transação </button>
   </div>
 
 
@@ -51,7 +51,10 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef> Ações </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-mini-fab color="warn" aria-label="Deletar Transação" (click)="deletar(element)">
+        <button class="mx-1" mat-mini-fab color="primary" aria-label="Editar Transação" (click)="openDialogAddOrUpdateTransacao(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button class="mx-1" mat-mini-fab color="warn" aria-label="Deletar Transação" (click)="deletar(element)">
           <mat-icon>delete</mat-icon>
         </button>
       </td>

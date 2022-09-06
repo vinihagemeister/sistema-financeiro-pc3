@@ -35,6 +35,14 @@ export class TransacaoService{
     return this.httpClient.put<Transacao>(RECURSO+`/${obj.id}`, obj);
   }
 
+  insertOrUpdate(obj: Transacao){
+    if(obj && obj.id){
+      return this.update(obj);
+    }else{
+      return this.insert(obj);
+    }
+  }
+
   delete(id: number){
     return this.httpClient.delete<Transacao>(RECURSO+`/${id}`);
   }
