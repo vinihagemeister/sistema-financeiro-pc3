@@ -1,3 +1,4 @@
+import { VeiculoService } from './../../models/veiculo/veiculo.service';
 import { DialogInserirTransacaoComponent } from './../dialog-inserir-transacao/dialog-inserir-transacao.component';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -20,14 +21,13 @@ export class PaginaPrincipalComponent implements OnInit {
   constructor(
     private router: Router,
     private transacaoService: TransacaoService,
+    private veiculoService: VeiculoService,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
 
-   this.buscaListaDeTransacoes();
-
-
+    this.buscaListaDeTransacoes();
 
     // let transacao1: Transacao = {
     //   id:1,
@@ -39,8 +39,6 @@ export class PaginaPrincipalComponent implements OnInit {
     //   saldo: 200,
     //   tipo: "ENTRADA"
     // };
-
-
   }
 
   buscaListaDeTransacoes() {
