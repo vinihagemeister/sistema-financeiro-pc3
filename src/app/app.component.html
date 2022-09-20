@@ -1,1 +1,52 @@
-<router-outlet></router-outlet>
+
+
+<mat-drawer-container hasBackdrop="true">
+  <mat-drawer class="example-sidenav" #drawer mode="over">
+
+    <h1>Sistema Financeiro</h1>
+
+    <div class="d-block btn btn-warning m-1" (click)="drawer.toggle()" (click)="navegaPara(['transacoes'])">
+      Transações
+    </div>
+
+    <div class="d-block btn btn-danger m-1" (click)="drawer.toggle()" (click)="navegaPara(['produtos'])">
+      Produtos
+    </div>
+
+    <div class="d-block btn btn-primary m-1" (click)="drawer.toggle()" (click)="navegaPara(['pagina2'])">
+      Página 2
+    </div>
+
+
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <!-- conteudo -->
+
+
+
+
+
+
+    <mat-toolbar>
+      <button (click)="drawer.toggle()" mat-icon-button class="example-icon me-3" aria-label="Example icon-button with menu icon">
+       <mat-icon>menu</mat-icon>
+     </button>
+     <span>Sistema Financeiro / {{title}}</span>
+     <span class="example-spacer"></span>
+     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>person</mat-icon>
+    </button>
+    </mat-toolbar>
+
+
+
+    <router-outlet></router-outlet>
+
+
+
+
+    <!-- conteudo -->
+
+  </mat-drawer-content>
+</mat-drawer-container>

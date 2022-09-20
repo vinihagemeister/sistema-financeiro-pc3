@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MaterialExampleModule } from 'src/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogInserirTransacaoComponent } from './components/dialog-inserir-transacao/dialog-inserir-transacao.component';
+import { DialogConfirmacaoExclusao } from './components/dialog-confirmacao-exclusao/dialog-confirmacao-exclusao.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DialogInserirTransacaoComponent } from './components/dialog-inserir-tra
     Pagina1Component,
     Pagina2Component,
     PaginaPrincipalComponent,
-    DialogInserirTransacaoComponent
+    DialogInserirTransacaoComponent,
+    DialogConfirmacaoExclusao,
   ],
   imports: [
     BrowserModule,

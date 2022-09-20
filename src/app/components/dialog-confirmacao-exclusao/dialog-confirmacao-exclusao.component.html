@@ -1,0 +1,11 @@
+<h1>Deletar Transação</h1>
+<mat-divider class="my-3"></mat-divider>
+
+<div class="d-flex justify-content-start">
+  <p>Tem certeza que deseja deletar a transação de id: {{transacao.id}}</p>
+</div>
+
+<div>
+  <button class="me-3 btn btn-success" (click)="deletar()">Deletar</button>
+  <button class="me-3 btn btn-danger" (click)="cancelar()">Cancelar</button>
+</div>

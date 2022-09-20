@@ -8,15 +8,28 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: PaginaPrincipalComponent
+    redirectTo: 'transacoes',
+    pathMatch: 'full'
+  },
+  {
+    path: 'transacoes',
+    component: PaginaPrincipalComponent,
+    data: { title: 'Transações'},
   },
   {
     path: 'pagina1',
-    component: Pagina1Component
+    redirectTo: 'produtos',
+    pathMatch: 'full'
+  },
+  {
+    path: 'produtos',
+    component: Pagina1Component,
+    data: { title: 'Produtos'},
   },
   {
     path: 'pagina2',
-    component: Pagina2Component
+    component: Pagina2Component,
+    data: { title: 'Página 2'},
   }
 
 

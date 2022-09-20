@@ -1,3 +1,4 @@
+import { DialogConfirmacaoExclusao } from './../dialog-confirmacao-exclusao/dialog-confirmacao-exclusao.component';
 import { VeiculoService } from './../../models/veiculo/veiculo.service';
 import { DialogInserirTransacaoComponent } from './../dialog-inserir-transacao/dialog-inserir-transacao.component';
 import { Router } from '@angular/router';
@@ -107,6 +108,18 @@ export class PaginaPrincipalComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // if(result && result.id) this.transacoes = this.transacoes.concat([result]);
       this.buscaListaDeTransacoes();
+    });
+
+  }
+
+  openDialogConfirmacaoExclusaoTransacao(obj: Transacao){
+    const dialogRef = this.dialog.open(DialogConfirmacaoExclusao, {
+      width: '1000px',
+      data: { transacao: obj }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) this.buscaListaDeTransacoes();
     });
 
   }

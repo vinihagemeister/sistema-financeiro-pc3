@@ -24,6 +24,8 @@ export class DialogInserirTransacaoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.transacao = this.data.transacao;
+
     if(this.data && this.data.transacao){
       this.modelToForm(this.data.transacao);
     }
