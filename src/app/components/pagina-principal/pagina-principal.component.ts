@@ -37,11 +37,21 @@ export class PaginaPrincipalComponent implements OnInit {
   ) { }
 
   ngAfterViewInit() {
+    this.dataSource1.paginator = this.paginator as MatPaginator;
     this.populaDataSourceEPaginator([] as Transacao[]);
   }
 
-  ngOnInit() {
-    this.buscaListaDeTransacoes();
+  populaDataSourceEPaginator(transacoes: Transacao[], linhasTotais?: number){
+    this.paginator.pageIndex = this.pagina;
+    console.log(this.pagina);
+    console.log(linhasTotais);
+    if(linhasTotais){
+      this.paginator.length = linhasTotais;
+      // this.totalDeLinhas = linhasTotais;
+    }
+
+    this.dataSource1 = new MatTableDataSource(transacoes);
+
   }
 
   pageChanged(event: PageEvent) {
@@ -50,24 +60,18 @@ export class PaginaPrincipalComponent implements OnInit {
     this.buscaListaDeTransacoes();
   }
 
+  ngOnInit() {
+    this.buscaListaDeTransacoes();
+  }
+
+
   // handlePageEvent(event: PageEvent) {
   //   this.length = event.length;
   //   this.pageSize = event.pageSize;
   //   this.pageIndex = event.pageIndex;
   // }
 
-  populaDataSourceEPaginator(transacoes: Transacao[], linhasTotais?: number){
-    this.paginator.pageIndex = this.pagina;
-    console.log(this.pagina);
-    console.log(linhasTotais);
-    if(linhasTotais){
-      this.paginator.length = linhasTotais;
-    }
 
-    this.dataSource1 = new MatTableDataSource(transacoes);
-
-    this.dataSource1.paginator = this.paginator as MatPaginator;
-  }
 
   buscaListaDeTransacoes() {
     let that = this;
