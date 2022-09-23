@@ -13,7 +13,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
 
-  <table mat-table [dataSource]="transacoes" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
 
     <!-- Id Column -->
     <ng-container matColumnDef="id">
@@ -66,6 +66,19 @@
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr>
   </table>
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 aria-label="Select page of periodic elements">
+  </mat-paginator> -->
+
+  <mat-paginator #paginator
+    [length]="totalDeLinhas"
+    [pageIndex]="pagina"
+    [pageSize]="limiteDeLinhas"
+    [pageSizeOptions]="pageSizeOptions1"
+    (page)="pageChanged($event)"
+    aria-label="Select page">
+    </mat-paginator>
 
 
 

@@ -6,10 +6,6 @@ import { environment } from 'src/environments/environment';
 const API = environment.urlApi;
 const RECURSO = API+'/transacao';
 
-// https://62fe3b20a85c52ee4833009b.mockapi.io
-
-// 'https://62fe3b20a85c52ee4833009b.mockapi.io/transacao'
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +15,8 @@ export class TransacaoService{
     private httpClient: HttpClient
   ){}
 
-  selectAll(){
-    return this.httpClient.get<Transacao[]>(RECURSO);
+  selectAll(pagina: number, limiteDeLinhas: number){
+    return this.httpClient.get<{ items: Transacao[], count: number }>(`${RECURSO}?page=${pagina+1}&limit=${limiteDeLinhas}`);
   }
 
   selectById(id: number){

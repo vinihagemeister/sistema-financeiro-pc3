@@ -2,11 +2,12 @@ import { DialogConfirmacaoExclusao } from './../dialog-confirmacao-exclusao/dial
 import { VeiculoService } from './../../models/veiculo/veiculo.service';
 import { DialogInserirTransacaoComponent } from './../dialog-inserir-transacao/dialog-inserir-transacao.component';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Transacao } from 'src/app/models/transacao/transacao.model';
 import { TransacaoService } from 'src/app/models/transacao/transacao.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pagina-principal',
@@ -15,40 +16,66 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
-  transacoes: any = [];
+  // transacoes: any = [];
+
+  dataSource1: MatTableDataSource<Transacao> = new MatTableDataSource([] as Transacao[]);
 
   displayedColumns: string[] = ['id', 'createdAt', 'tipo', 'valor', 'saldo', 'acoes'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  totalDeLinhas = 10;
+  limiteDeLinhas = 5;
+  pagina = 0;
+  pageSizeOptions1: number[] = [5, 10, 25, 100];
+
 
   constructor(
     private router: Router,
     private transacaoService: TransacaoService,
-    private veiculoService: VeiculoService,
     public dialog: MatDialog,
   ) { }
 
+  ngAfterViewInit() {
+    this.populaDataSourceEPaginator([] as Transacao[]);
+  }
+
   ngOnInit() {
-
     this.buscaListaDeTransacoes();
+  }
 
-    // let transacao1: Transacao = {
-    //   id:1,
-    //   ativo: true,
-    //   createdAt: "2022-08-18",
-    //   updatedAt: "2022-08-18",
-    //   descricao: "teste",
-    //   valor: 100,
-    //   saldo: 200,
-    //   tipo: "ENTRADA"
-    // };
+  pageChanged(event: PageEvent) {
+    this.limiteDeLinhas = event.pageSize;
+    this.pagina = event.pageIndex;
+    this.buscaListaDeTransacoes();
+  }
+
+  // handlePageEvent(event: PageEvent) {
+  //   this.length = event.length;
+  //   this.pageSize = event.pageSize;
+  //   this.pageIndex = event.pageIndex;
+  // }
+
+  populaDataSourceEPaginator(transacoes: Transacao[], linhasTotais?: number){
+    this.paginator.pageIndex = this.pagina;
+    console.log(this.pagina);
+    console.log(linhasTotais);
+    if(linhasTotais){
+      this.paginator.length = linhasTotais;
+    }
+
+    this.dataSource1 = new MatTableDataSource(transacoes);
+
+    this.dataSource1.paginator = this.paginator as MatPaginator;
   }
 
   buscaListaDeTransacoes() {
     let that = this;
 
-    this.transacaoService.selectAll().subscribe(
+    this.transacaoService.selectAll(this.pagina, this.limiteDeLinhas).subscribe(
       {
-        next(transacoes){
-          that.transacoes = transacoes;
+        next(resposta){
+          that.populaDataSourceEPaginator(resposta.items, resposta.count);
         },
         error(err){
           console.error(err);
@@ -60,43 +87,13 @@ export class PaginaPrincipalComponent implements OnInit {
     );
   }
 
-  addTransacao(){
-    // this.dataSource.push(  {
-    //   id:1,
-    //   ativo: true,
-    //   createdAt: "2022-08-18",
-    //   updatedAt: "2022-08-18",
-    //   descricao: "teste",
-    //   valor: 100,
-    //   saldo: 200,
-    //   tipo: "ENTRADA"
-    // });
-
-    this.transacoes = this.transacoes.concat([{
-        id:1,
-        ativo: true,
-        createdAt: "2022-08-18",
-        updatedAt: "2022-08-18",
-        descricao: "teste",
-        valor: 100,
-        saldo: 200,
-        tipo: "ENTRADA"
-    }])
-
-    //breanch vinicius
-
-    //branch principal
-  }
-
-
   navegarPara(rota: any[]){
     this.router.navigate(rota);
   }
 
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.transacoes.filter = filterValue.trim().toLowerCase();
+    this.dataSource1.filter = filterValue.trim().toLowerCase();
   }
 
   openDialogAddOrUpdateTransacao(obj?: Transacao){
