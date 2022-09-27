@@ -16,15 +16,11 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 })
 export class PaginaPrincipalComponent implements OnInit {
 
-  // transacoes: any = [];
-
   dataSource1: MatTableDataSource<Transacao> = new MatTableDataSource([] as Transacao[]);
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['id', 'createdAt', 'tipo', 'valor', 'saldo', 'acoes'];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  totalDeLinhas = 10;
+  totalDeLinhas = 0;
   limiteDeLinhas = 5;
   pagina = 0;
   pageSizeOptions1: number[] = [5, 10, 25, 100];
@@ -43,15 +39,12 @@ export class PaginaPrincipalComponent implements OnInit {
 
   populaDataSourceEPaginator(transacoes: Transacao[], linhasTotais?: number){
     this.paginator.pageIndex = this.pagina;
-    console.log(this.pagina);
-    console.log(linhasTotais);
+
     if(linhasTotais){
       this.paginator.length = linhasTotais;
-      // this.totalDeLinhas = linhasTotais;
     }
 
     this.dataSource1 = new MatTableDataSource(transacoes);
-
   }
 
   pageChanged(event: PageEvent) {
