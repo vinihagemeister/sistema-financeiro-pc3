@@ -21,7 +21,7 @@ export class TransacaoService{
   }
 
   selectById(id: number){
-    return this.httpClient.get<Transacao[]>(RECURSO+`/${id}`);
+    return this.httpClient.get<Transacao>(RECURSO+`/${id}`);
   }
 
   insert(obj: Transacao){
