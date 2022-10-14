@@ -1,6 +1,3 @@
-import { DialogConfirmacaoExclusao } from './../dialog-confirmacao-exclusao/dialog-confirmacao-exclusao.component';
-import { VeiculoService } from './../../models/veiculo/veiculo.service';
-import { DialogInserirTransacaoComponent } from './../dialog-inserir-transacao/dialog-inserir-transacao.component';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +5,8 @@ import { Transacao } from 'src/app/models/transacao/transacao.model';
 import { TransacaoService } from 'src/app/models/transacao/transacao.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { DialogInserirTransacaoComponent } from 'src/app/components/dialog-inserir-transacao/dialog-inserir-transacao.component';
+import { DialogConfirmacaoExclusao } from 'src/app/components/dialog-confirmacao-exclusao/dialog-confirmacao-exclusao.component';
 
 @Component({
   selector: 'app-pagina-principal',
@@ -69,10 +68,10 @@ export class PaginaPrincipalComponent implements OnInit {
   buscaListaDeTransacoes() {
     let that = this;
 
-    this.transacaoService.selectAll(this.pagina, this.limiteDeLinhas).subscribe(
+    this.transacaoService.selectAllComPaginacao(this.pagina, this.limiteDeLinhas).subscribe(
       {
         next(resposta){
-          that.populaDataSourceEPaginator(resposta.items, resposta.count);
+          that.populaDataSourceEPaginator(resposta.content, resposta.totalElements);
         },
         error(err){
           console.error(err);

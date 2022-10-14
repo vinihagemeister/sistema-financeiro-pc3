@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlApi: 'https://62fe3b20a85c52ee4833009b.mockapi.io',
+  //urlApi: 'https://62fe3b20a85c52ee4833009b.mockapi.io',
+  urlApi: 'http://localhost:8080',
   urlApiTabelaFipe: 'https://veiculos.fipe.org.br/api'
 };
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { routesPagina2 } from './pagina2-routing.module';
+import { Pagina2Component } from './pagina2.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -9,25 +9,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MaterialExampleModule } from 'src/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { PublicoComponent } from './layout/publico/publico.component';
-import { UsuarioLayoutComponent } from './layout/usuario-layout/usuario-layout.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    // Pagina1Component,
-    // Pagina2Component,
-    // PaginaPrincipalComponent,
-    // DialogInserirTransacaoComponent,
-    // DialogConfirmacaoExclusao,
-    PublicoComponent,
-    UsuarioLayoutComponent,
+    Pagina2Component,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    CommonModule,
+    RouterModule.forChild(routesPagina2),
 
-    BrowserAnimationsModule,
+
     FormsModule,
     MatTableModule,
     MatFormFieldModule,
@@ -39,6 +32,6 @@ import { UsuarioLayoutComponent } from './layout/usuario-layout/usuario-layout.c
     MaterialExampleModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [Pagina2Component]
 })
-export class AppModule { }
+export class Pagina2Module { }

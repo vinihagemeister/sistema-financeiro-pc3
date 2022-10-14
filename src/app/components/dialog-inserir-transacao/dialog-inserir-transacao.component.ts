@@ -2,6 +2,7 @@ import { TransacaoService } from 'src/app/models/transacao/transacao.service';
 import { Transacao } from 'src/app/models/transacao/transacao.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Usuario } from 'src/app/models/usuario/usuario.model';
 
 @Component({
   selector: 'app-dialog-inserir-transacao',
@@ -35,27 +36,28 @@ export class DialogInserirTransacaoComponent implements OnInit {
 
     let transacaoParaSalvar = this.formToModel();
 
-    let that = this;
 
-    this.transacaoService.selectUltimoSaldo().subscribe(
-      saldo=>{
-        if(saldo){
+    this.salvarTransacao(transacaoParaSalvar);
 
-          if(transacaoParaSalvar.tipo == "ENTRADA"){
+    // this.transacaoService.selectUltimoSaldo().subscribe(
+    //   saldo=>{
+    //     if(saldo){
 
-            transacaoParaSalvar.saldo = Number(saldo) + Number(transacaoParaSalvar.valor);
-            this.salvarTransacao(transacaoParaSalvar);
+    //       if(transacaoParaSalvar.tipo == "ENTRADA"){
 
-          }else if(transacaoParaSalvar.tipo == "SAIDA"){
+    //         transacaoParaSalvar.saldo = Number(saldo) + Number(transacaoParaSalvar.valor);
+    //         this.salvarTransacao(transacaoParaSalvar);
 
-            transacaoParaSalvar.saldo = Number(saldo) - Number(transacaoParaSalvar.valor);
-            this.salvarTransacao(transacaoParaSalvar);
+    //       }else if(transacaoParaSalvar.tipo == "SAIDA"){
 
-          }
+    //         transacaoParaSalvar.saldo = Number(saldo) - Number(transacaoParaSalvar.valor);
+    //         this.salvarTransacao(transacaoParaSalvar);
 
-        }
-      }
-    )
+    //       }
+
+    //     }
+    //   }
+    // )
 
   }
 
@@ -89,6 +91,8 @@ export class DialogInserirTransacaoComponent implements OnInit {
     this.transacao.descricao = this.descricaoInput;
     this.transacao.valor = this.valorInput;
     this.transacao.tipo = this.tipoInput;
+
+    this.transacao.usuario = { id: "5b3c78e8-aa7e-4090-94ae-b278f26dfcd0" } as Usuario;
 
     return this.transacao;
   }

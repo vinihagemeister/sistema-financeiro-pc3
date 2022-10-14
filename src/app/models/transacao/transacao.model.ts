@@ -1,5 +1,7 @@
+import { Usuario } from "../usuario/usuario.model";
+
 export interface Transacao{
-  id?: number;
+  id?: string | number;
   ativo?: boolean;
   createdAt?: string;
   updatedAt?: string;
@@ -7,4 +9,5 @@ export interface Transacao{
   valor: number;
   saldo?: number;
   descricao: string;
+  usuario: Usuario
 }

@@ -16,8 +16,12 @@ export class TransacaoService{
     private httpClient: HttpClient
   ){}
 
-  selectAll(pagina: number, limiteDeLinhas: number){
-    return this.httpClient.get<{ items: Transacao[], count: number }>(`${RECURSO}?page=${pagina+1}&limit=${limiteDeLinhas}`);
+  selectAll(){
+    return this.httpClient.get<Transacao[]>(`${RECURSO}`);
+  }
+
+  selectAllComPaginacao(pagina: number, limiteDeLinhas: number){
+    return this.httpClient.get<{ content: Transacao[], totalElements: number, pageable: any, sort: any }>(`${RECURSO}/selectAllComPaginacao?page=${pagina}&size=${limiteDeLinhas}`);
   }
 
   selectById(id: number){

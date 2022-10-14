@@ -1,19 +1,19 @@
-<!--
+
 
 <mat-drawer-container hasBackdrop="true">
   <mat-drawer class="example-sidenav" #drawer mode="over">
 
     <h1>Sistema Financeiro</h1>
 
-    <div class="d-block btn btn-warning m-1" (click)="drawer.toggle()" (click)="navegaPara(['transacoes'])">
+    <div class="d-block btn btn-warning m-1" (click)="drawer.toggle()" (click)="navegaPara(['usuario', 'transacoes'])">
       Transações
     </div>
 
-    <div class="d-block btn btn-danger m-1" (click)="drawer.toggle()" (click)="navegaPara(['produtos'])">
+    <div class="d-block btn btn-danger m-1" (click)="drawer.toggle()" (click)="navegaPara(['usuario', 'produtos'])">
       Produtos
     </div>
 
-    <div class="d-block btn btn-primary m-1" (click)="drawer.toggle()" (click)="navegaPara(['pagina2'])">
+    <div class="d-block btn btn-primary m-1" (click)="drawer.toggle()" (click)="navegaPara(['publico'])">
       Página 2
     </div>
 
@@ -38,12 +38,11 @@
     </button>
     </mat-toolbar>
 
- -->
+
 
     <router-outlet></router-outlet>
 
 
 
-<!--
   </mat-drawer-content>
-</mat-drawer-container> -->
+</mat-drawer-container>
